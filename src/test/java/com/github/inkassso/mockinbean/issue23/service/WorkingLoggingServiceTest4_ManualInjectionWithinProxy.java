@@ -31,12 +31,13 @@ class WorkingLoggingServiceTest4_ManualInjectionWithinProxy {
     @Autowired
     private ProviderService providerService;
 
+    Object beanToReplaceIn;
+    String fieldToReplace;
+    Object providerServiceActual;
+    ProviderService providerServiceSpy;
+
     @BeforeEach
     public void setUp() throws Exception {
-        Object beanToReplaceIn;
-        String fieldToReplace;
-        ProviderService providerServiceSpy;
-
         TargetSource targetSource = getProxyContainingUltimateTarget(providerService);
         if (targetSource == null) {
             beanToReplaceIn = loggingService;
@@ -48,6 +49,7 @@ class WorkingLoggingServiceTest4_ManualInjectionWithinProxy {
             providerServiceSpy = Mockito.spy((ProviderService) targetSource.getTarget());
         }
 
+        providerServiceActual = ReflectionTestUtils.getField(beanToReplaceIn, fieldToReplace);
         ReflectionTestUtils.setField(beanToReplaceIn, fieldToReplace, providerServiceSpy);
     }
 
@@ -74,7 +76,7 @@ class WorkingLoggingServiceTest4_ManualInjectionWithinProxy {
 
     @AfterEach
     public void tearDown() {
-        ReflectionTestUtils.setField(loggingService, "providerService", providerService);
+        ReflectionTestUtils.setField(beanToReplaceIn, fieldToReplace, providerServiceActual);
     }
 
     @Test
