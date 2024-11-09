@@ -18,7 +18,7 @@ import org.springframework.test.util.ReflectionTestUtils;
  * but it does at invocation verification.
  */
 @SpringBootTest
-class BrokenLoggingServiceTest2 {
+class BrokenLoggingServiceTest2_ManualInjectionOfSpyFromProxy {
     
     @Autowired
     protected LoggingService loggingService;

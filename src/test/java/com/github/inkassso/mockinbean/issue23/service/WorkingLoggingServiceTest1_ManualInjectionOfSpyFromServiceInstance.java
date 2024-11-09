@@ -17,11 +17,11 @@ import org.springframework.test.util.ReflectionTestUtils;
  * Then, during mock creation the information is stored under the hashCode of the actual service instance and,
  * at invocation verification, Mockito has nothing to unwrap and finds the mock information under the same hashCode.
  *
- * The aspect is not invoked in this case, due to the proxy being removed. Maybe there's a way to replace
- * the actual service instance within the proxy with the spy, instead of the proxy within the other service?
+ * The aspect is not invoked in this case, due to the proxy being removed. See {@link WorkingLoggingServiceTest4_ManualInjectionWithinProxy} where the proxy
+ * is not bypassed and the aspect keeps working.
  */
 @SpringBootTest
-class WorkingLoggingServiceTest1 {
+class WorkingLoggingServiceTest1_ManualInjectionOfSpyFromServiceInstance {
     
     @Autowired
     protected LoggingService loggingService;

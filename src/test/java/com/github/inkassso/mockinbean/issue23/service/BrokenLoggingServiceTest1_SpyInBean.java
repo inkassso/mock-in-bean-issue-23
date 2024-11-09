@@ -23,7 +23,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  * See {@link org.springframework.boot.test.mock.mockito.SpringBootMockResolver} responsible for unwrapping the proxy.
  */
 @SpringBootTest
-class BrokenLoggingServiceTest1 {
+class BrokenLoggingServiceTest1_SpyInBean {
 
     @Autowired
     protected LoggingService loggingService;
